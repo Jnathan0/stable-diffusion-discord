@@ -1,0 +1,10 @@
+{
+	"BOT_TOKEN": "CHANGE ME",
+	"BACKEND_URL": "CHANGE ME",
+	"COLLAGE_FORMAT": "PNG",
+	"IMAGE_SELECT_TIMEOUT": 10800,
+	"CUSTOM_HEADERS": {
+		"Header1 Key": "Header1 value",
+        "Header2 Key": "Header2 value"
+	}
+}
