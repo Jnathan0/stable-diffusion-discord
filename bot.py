@@ -7,6 +7,7 @@ from utils.Collage import *
 from utils.ImageSelect import *
 from utils.Images import *
 from utils.Config import get_config
+from utils.Update import update_local
 import aiohttp
 import discord
 
@@ -65,6 +66,15 @@ async def generate(interaction: discord.Interaction, prompt: str):
     await interaction.followup.send(f'`{prompt}`', file=collage, view=ImageSelectView(collage, images, timeout=client.config['IMAGE_SELECT_TIMEOUT']))
 
 
+@client.tree.command()
+async def update(interaction: discord.Interaction):
+    await interaction.response.defer(thinking=True)
+    try:
+        result = await update_local()
+        await interaction.followup.send(f'{result}')
+    except Exception as e:
+        await interaction.followup.send(f'Error: update process generated the following exception:\n```{e}```')
+    
 
 
 if __name__ == '__main__':
