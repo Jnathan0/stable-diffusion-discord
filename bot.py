@@ -71,7 +71,7 @@ async def update(interaction: discord.Interaction):
     await interaction.response.defer(thinking=True)
     try:
         result = await update_local()
-        await interaction.followup.send(f'{result}')
+        await interaction.followup.send(f'`UPDATE FOUND: RESTARTING`\n{result}')
     except Exception as e:
         await interaction.followup.send(f'Error: update process generated the following exception:\n```{e}```')
     
