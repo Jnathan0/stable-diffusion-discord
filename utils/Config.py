@@ -7,7 +7,7 @@ CONFIG_DICT = {
     "BACKEND_URL": "",
     "COLLAGE_FORMAT": "PNG",
     "IMAGE_SELECT_TIMEOUT": 10800,
-    "CUSTOM_HEADERS": []
+    "CUSTOM_HEADERS": ""
 }
 
 
@@ -36,7 +36,7 @@ def get_config(path: str) -> dict:
         # Iterate through keys in CONFIG_DICT and set using os.getenv
         # Defaults are provided from CONFIG_DICT
         for setting in CONFIG_DICT.keys():
-            if setting == 'CUSTOM_HEADERS':
+            if setting == "CUSTOM_HEADERS":
                 config[setting] = json.loads(os.getenv(setting.upper()))
             else:
                 config[setting] = os.getenv(setting.upper(), default = CONFIG_DICT[setting])
