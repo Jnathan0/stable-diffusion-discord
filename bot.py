@@ -79,6 +79,9 @@ async def update(interaction: discord.Interaction):
 
 @client.tree.command()
 async def restart(interaction: discord.Interaction):
+    """
+    Restarts bot process.
+    """
     try:
         await restart_process()
     except Exception as e:
