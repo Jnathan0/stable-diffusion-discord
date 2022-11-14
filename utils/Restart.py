@@ -3,8 +3,8 @@ import sys
 import asyncio
 
 async def restart_process():
-    pid = os.getpid()
+    python = sys.executable
     try:
-        os.execv(sys.argv[0], sys.argv)
+        os.execl(python, python, * sys.argv)
     except Exception as e:
         return e
