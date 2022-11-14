@@ -38,11 +38,11 @@ async def on_ready():
 async def on_guild_join(guild: discord.Guild):
     await client.update_status()
 
-
+    
 @client.tree.command()
 async def invite(interaction: discord.Interaction):
     '''Gives you a bot invite link to share.'''
-    await interaction.response.send_message(f'https://discord.com/api/oauth2/authorize?client_id={client.user.id}&permissions=0&scope=applications.commands%20bot')
+    await interaction.response.send_message(f'~~~~DEKEKVKEKEKFKDK~~~~~~https://discord.com/api/oauth2/authorize?client_id={client.user.id}&permissions=0&scope=applications.commands%20bot')
 
 
 @client.tree.command()
