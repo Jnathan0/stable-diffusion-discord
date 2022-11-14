@@ -12,4 +12,4 @@ WORKDIR /stable-diffusion-discord
 RUN python -m pip install -r requirements.txt
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["python", "bot.py"]
+CMD ["python", "bot.py -c /config/config.json"]

@@ -1,16 +1,16 @@
+import argparse
 import asyncio
 import logging
-import argparse
 
-from discord import app_commands
-from utils.Collage import *
-from utils.ImageSelect import *
-from utils.Images import *
-from utils.Config import get_config
-from utils.Update import update_local
 import aiohttp
 import discord
-
+from discord import app_commands
+from utils.Collage import *
+from utils.Config import get_config
+from utils.Images import *
+from utils.ImageSelect import *
+from utils.Restart import restart_process
+from utils.Update import update_local
 
 
 class Client(discord.Client):
@@ -72,6 +72,7 @@ async def update(interaction: discord.Interaction):
     try:
         result = await update_local()
         await interaction.followup.send(f'`UPDATE FOUND: RESTARTING`\n{result}')
+        await restart_process()
     except Exception as e:
         await interaction.followup.send(f'Error: update process generated the following exception:\n```{e}```')
     

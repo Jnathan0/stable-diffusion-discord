@@ -2,3 +2,5 @@ config.json
 env/
 utils/__pycache__
 docker-compose.yaml
+*.out
+/config
