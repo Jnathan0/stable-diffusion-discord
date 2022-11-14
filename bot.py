@@ -77,6 +77,13 @@ async def update(interaction: discord.Interaction):
         await interaction.followup.send(f'Error: update process generated the following exception:\n```{e}```')
     
 
+@client.tree.command()
+async def restart(interaction: discord.Interaction):
+    try:
+        await restart_process()
+    except Exception as e:
+        await interaction.followup.send(f'ERROR: something happened. See stacktrace:\n{e}')
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
