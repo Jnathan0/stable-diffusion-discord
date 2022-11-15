@@ -68,6 +68,13 @@ async def generate(interaction: discord.Interaction, prompt: str):
 
 
 @client.tree.command()
+async def test(interaction: discord.Interaction):
+    """
+    TEST PLEASE DELETE ME LMAO
+    """
+    await interaction.followup.send("https://i.imgflip.com/5xlk92.gif")
+
+@client.tree.command()
 async def update(interaction: discord.Interaction):
     await interaction.response.defer(thinking=True)
     try:
