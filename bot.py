@@ -31,7 +31,6 @@ config: object
 @client.event
 async def on_ready():
     logging.info(f'Logged in as {client.user} (ID: {client.user.id})')
-    await client.setup_hook()
     await client.update_status()
 
 
