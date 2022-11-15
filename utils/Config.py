@@ -7,6 +7,7 @@ CONFIG_DICT = {
     "BACKEND_URL": "",
     "COLLAGE_FORMAT": "PNG",
     "IMAGE_SELECT_TIMEOUT": 10800,
+    "GUILD_ID": "",
     "CUSTOM_HEADERS": ""
 }
 

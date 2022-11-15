@@ -19,7 +19,8 @@ class Client(discord.Client):
         self.tree = app_commands.CommandTree(self)
 
     async def setup_hook(self):
-        await self.tree.sync()
+        self.tree.copy_global_to(guild=discord.Object(self.config["GUILD_ID"]))
+        await self.tree.sync(guild=discord.Object(self.config["GUILD_ID"]))
 
     async def update_status(self):
         await self.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f'{len(self.guilds)} /help'))
