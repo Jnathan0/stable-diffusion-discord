@@ -19,7 +19,6 @@ class Client(discord.Client):
         self.tree = app_commands.CommandTree(self)
 
     async def setup_hook(self):
-        self.tree.copy_global_to(guild=discord.Object(self.config["GUILD_ID"]))
         await self.tree.sync(guild=discord.Object(self.config["GUILD_ID"]))
 
     async def update_status(self):
