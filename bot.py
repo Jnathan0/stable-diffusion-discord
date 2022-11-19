@@ -13,13 +13,14 @@ from utils.Restart import restart_process
 from utils.Update import update_local
 
 
+
 class Client(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
 
     async def setup_hook(self):
-        await self.tree.sync(guild=discord.Object(self.config["GUILD_ID"]))
+        await self.tree.sync()
 
     async def update_status(self):
         await self.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f'{len(self.guilds)} /help'))
@@ -66,12 +67,24 @@ async def generate(interaction: discord.Interaction, prompt: str):
     await interaction.followup.send(f'`{prompt}`', file=collage, view=ImageSelectView(collage, images, timeout=client.config['IMAGE_SELECT_TIMEOUT']))
 
 
-@client.tree.command()
-async def test(interaction: discord.Interaction):
-    """
-    TEST PLEASE DELETE ME LMAO
-    """
-    await interaction.followup.send("https://i.imgflip.com/5xlk92.gif")
+# @client.event()
+# async def on_reaction_add():
+#     """
+#     Uses img2img api to generate an image.
+
+#     Must be a reply to a message with an image, or must be used in a message with an image.
+#     """
+#     await interaction.response.defer(thinking=True)
+
+#     resp = await interaction.original_message()
+#     print(resp.attachments)
+
+#     if interaction.message == discord.MessageType.reply:
+#         await interaction.followup.send('this is an interaction to a reply message')
+#     else:
+#         pass
+
+#     await interaction.followup.send("https://i.imgflip.com/5xlk92.gif")
 
 @client.tree.command()
 async def update(interaction: discord.Interaction):
