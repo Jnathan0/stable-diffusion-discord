@@ -47,7 +47,7 @@ async def invite(interaction: discord.Interaction):
 
 
 @client.tree.command()
-async def generate(interaction: discord.Interaction, prompt: str):
+async def generate(interaction: discord.Interaction, prompt: str, steps: int = 50):
     '''Generates images based on prompt given.'''
     logging.info(f'Got request to generate images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id})')
     await interaction.response.defer(thinking=True)
@@ -58,7 +58,7 @@ async def generate(interaction: discord.Interaction, prompt: str):
         if attempt > 0:
             logging.warning(f'Image generate request failed on attempt {attempt} for prompt "{prompt}" issued by {interaction.user} (ID: {interaction.user.id})')
         attempt += 1
-        images = await generate_images(prompt, client.config)
+        images = await generate_images(prompt, client.config, steps)
 
     logging.info(f'Successfully generated images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id}) on attempt {attempt}')
     collage = await make_collage(images, 3, client.config)
