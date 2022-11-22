@@ -47,10 +47,14 @@ async def invite(interaction: discord.Interaction):
 
 
 @client.tree.command()
-async def generate(interaction: discord.Interaction, prompt: str, steps: int = 50):
+async def generate(interaction: discord.Interaction, prompt: str, steps: int = 50, batch: int = 1):
     '''Generates images based on prompt given.'''
     logging.info(f'Got request to generate images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id})')
     await interaction.response.defer(thinking=True)
+
+    if batch > 6:
+        await interaction.followup.send(f"`batch size must be 6 or less`")
+        return
 
     images = None
     attempt = 0
