@@ -47,7 +47,7 @@ async def invite(interaction: discord.Interaction):
 
 
 @client.tree.command()
-async def generate(interaction: discord.Interaction, prompt: str, steps: int = 50, batch: int = 1):
+async def generate(interaction: discord.Interaction, prompt: str, steps: int = 20, batch: int = 1):
     '''Generates images based on prompt given.'''
     logging.info(f'Got request to generate images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id})')
     await interaction.response.defer(thinking=True)
