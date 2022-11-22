@@ -62,7 +62,7 @@ async def generate(interaction: discord.Interaction, prompt: str, steps: int = 2
         if attempt > 0:
             logging.warning(f'Image generate request failed on attempt {attempt} for prompt "{prompt}" issued by {interaction.user} (ID: {interaction.user.id})')
         attempt += 1
-        images = await generate_images(prompt, client.config, steps)
+        images = await generate_images(prompt, client.config, steps, batch)
 
     logging.info(f'Successfully generated images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id}) on attempt {attempt}')
     collage = await make_collage(images, 3, client.config)
