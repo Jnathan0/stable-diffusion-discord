@@ -47,7 +47,7 @@ async def invite(interaction: discord.Interaction):
 
 
 @client.tree.command()
-async def generate(interaction: discord.Interaction, prompt: str, steps: int = 20, batch: int = 1):
+async def generate(interaction: discord.Interaction, prompt: str, negative_prompts: str = None, steps: int = 20, batch: int = 1):
     '''Generates images based on prompt given.'''
     logging.info(f'Got request to generate images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id})')
     await interaction.response.defer(thinking=True)
@@ -62,13 +62,14 @@ async def generate(interaction: discord.Interaction, prompt: str, steps: int = 2
         if attempt > 0:
             logging.warning(f'Image generate request failed on attempt {attempt} for prompt "{prompt}" issued by {interaction.user} (ID: {interaction.user.id})')
         attempt += 1
-        images = await generate_images(prompt, client.config, steps, batch)
+        images = await generate_images(prompt, negative_prompts, client.config, steps, batch)
 
     logging.info(f'Successfully generated images with prompt "{prompt}" from {interaction.user} (ID: {interaction.user.id}) on attempt {attempt}')
     collage = await make_collage(images, 3, client.config)
     collage = discord.File(collage, filename=f'collage.{client.config["COLLAGE_FORMAT"]}')
     images = [discord.File(images[i], filename=f'{i}.jpg') for i in range(len(images))]
-    await interaction.followup.send(f'`{prompt}`', file=collage, view=ImageSelectView(collage, images, timeout=client.config['IMAGE_SELECT_TIMEOUT']))
+    reply_message = (prompt+'\n'+"Negative Prompts: "+negative_prompts) if negative_prompts else prompt 
+    await interaction.followup.send(f'`{reply_message}`', file=collage, view=ImageSelectView(collage, images, timeout=client.config['IMAGE_SELECT_TIMEOUT']))
 
 
 # @client.event()
